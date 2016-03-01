@@ -20,7 +20,10 @@ html
               a href='/scanned_ports/' Просканированные порты
 
     .container
+
       .row
         .col-lg-12
+          p.notice = notice
+          p.alert = alert
           = yield
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :scanned_ports
   resources :organizations do
     get 'scan'
