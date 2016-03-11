@@ -1,4 +1,6 @@
 class Organization < ActiveRecord::Base
+  
+  resourcify
 
   validates :name, length: {minimum: 3, maximum: 255}
   validates :name, uniqueness: true
