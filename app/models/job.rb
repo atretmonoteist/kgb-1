@@ -6,7 +6,7 @@ class Job < ActiveRecord::Base
   has_many :schedules
 
   validates :name, length: {minimum: 3, maximum: 255}
-  validates :name, uniqueness: true # !!! добавить провеорку уникальности имени в сочетании с организацией
+  validates :name, uniqueness: true # !!! добавить проверку уникальности имени в сочетании с организацией
   validates :options, presence: true
   validates :ports, presence: true
   validates :hosts, presence: true
