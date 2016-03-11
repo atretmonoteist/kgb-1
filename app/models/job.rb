@@ -1,7 +1,5 @@
 class Job < ActiveRecord::Base
-  
-  resourcify
-  
+
   belongs_to :organization
   has_many :schedules
 
