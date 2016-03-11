@@ -6,9 +6,10 @@ class ScannedPortsController < ApplicationController
   # dt_big_table(params)
   # и view datatable.json.erb
   def datatable
+    allowed_jobs_ids = policy_scope(Job).map {|job| job.id}
     fields = [{field: 'scanned_ports.job_time', as: 'job_time'},
               {field: 'scanned_ports.id', as: 'id', invisible: true},
-              {field: 'scanned_ports.job_id', as: 'job_id', invisible: true},
+              {field: 'scanned_ports.job_id', as: 'job_id', invisible: true, filter: "jobs.id IN (#{allowed_jobs_ids.join(',')})"},
               {field: 'jobs.name', as: 'job_name', joins: 'jobs', on: 'jobs.id = scanned_ports.job_id'},
               {field: 'scanned_ports.host_ip', as: 'host_ip'},
               {field: 'scanned_ports.number', as: 'number'},
@@ -53,7 +54,8 @@ map_by_sql:  "CASE
   # GET /scanned_ports
   # GET /scanned_ports.json
   def index
-    @scanned_ports = ScannedPort.all#.order(job_time: :asc)
+   #@scanned_ports = ScannedPort.all#.order(job_time: :asc)
+    authorize ScannedPort
   end
 
   # GET /scanned_ports/1
