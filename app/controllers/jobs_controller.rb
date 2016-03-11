@@ -10,7 +10,9 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    authorize Job
+    #@jobs = Job.all
+    @jobs = policy_scope(Job)
   end
 
   # GET /jobs/1
